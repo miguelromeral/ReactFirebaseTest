@@ -1,6 +1,6 @@
 import React from 'react'
 import Home from './home'
-import db from '../../firebase.config'
+import firestore from '../../firebase.config'
 import 'bootstrap/dist/css/bootstrap.css'
 import Test from '../../classes/testClass'
 import TestElement from '../../components/testElement'
@@ -48,7 +48,7 @@ class HomeContainer extends React.Component {
                 loading: true,
                 error: false,
             })
-            await db.collection('test')
+            await firestore.collection('test')
                 .onSnapshot(this.onResult, this.onError)
         } catch (e) {
             console.error("Error: " + e)
