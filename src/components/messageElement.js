@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom'
 
-function MessaageElement({id, content}){
+function MessaageElement({id, content, showDetail}){
 
     return (
         <div>
@@ -7,6 +8,7 @@ function MessaageElement({id, content}){
             <div>
                 Content: {content}
             </div>
+            {showDetail && <Link to={`/messages/${id}`}>Show details</Link>}
         </div>
     )
 }

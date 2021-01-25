@@ -14,6 +14,8 @@ import PasswordReset from './pages/passwordReset'
 import MessagesPage from './pages/MessagesPage'
 import MessagesPages from './pages/MessagesPages'
 import AuthenticatedRoute from './components/AuthenticatedRoute'
+import CreateMssagePage from './pages/CreateMessagePage';
+import MessageDetailPage from './pages/MessageDetailPage';
 
 function App() {
   const user = useContext(UserContext);
@@ -47,6 +49,12 @@ function App() {
           path="/messages"
           component={MessagesPages}
         />
+        <Route
+          exact
+          path="/create"
+          component={CreateMssagePage}
+        />
+        <Route path="/messages/:id" exact component={MessageDetailPage} />
         <Route
           exact
           path="/passwordReset"

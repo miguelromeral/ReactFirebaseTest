@@ -104,7 +104,7 @@ class MessagesPages extends React.Component {
             if (data.length != 0) {
                 const listItems = data.map(data => (
                     <li key={data.id}>
-                        <MessaageElement {...data} />
+                        <MessaageElement {...data} showDetail={true} />
                     </li>
                 ))
 
