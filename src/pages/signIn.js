@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { signInWithGoogle } from "../firebase.config";
-import { Link } from 'react-router-dom'
+import { useHistory , Link } from 'react-router-dom'
 
 const SignIn = () => {
+  let history = useHistory();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -59,11 +61,13 @@ const SignIn = () => {
         <p className="text-center my-3">or</p>
         <button
           onClick={() => {
-            signInWithGoogle();
+            signInWithGoogle()
+            //history.push('/profile')
           }}
           className="bg-red-500 hover:bg-red-600 w-full py-2 text-white">
           Sign in with Google
         </button>
+
         <p className="text-center my-3">
           Don't have an account?{" "}
           <Link to="signUp" className="text-blue-500 hover:text-blue-600">

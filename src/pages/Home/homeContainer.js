@@ -3,7 +3,6 @@ import Home from './home'
 import firestore from '../../firebase.config'
 import 'bootstrap/dist/css/bootstrap.css'
 import Test from '../../classes/testClass'
-import TestElement from '../../components/testElement'
 
 /**
  * Container Component for Home page
