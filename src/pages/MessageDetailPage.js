@@ -6,6 +6,7 @@ import Message from "../classes/messageClass"
 import firestore, { auth } from "../firebase.config"
 import { UserContext } from "../providers/UserProvider";
 import Error from "./error";
+import Layout from "../components/layout";
 
 class MessageDetailPage extends React.Component {
     id = this.props.match.params.id
@@ -47,7 +48,20 @@ class MessageDetailPage extends React.Component {
                 loading: true,
                 error: false,
             })
-            await firestore.collection(`${user.uid}`).doc(this.id).onSnapshot(this.onResult, this.onError)
+            var res = await firestore.collection(`${user.uid}`).doc(this.id).get() //(this.onResult, this.onError)
+            //console.log("Res: "+res)
+
+            var id = res.id
+            var data = res.data()
+            var msg = new Message(id, data.content)
+
+            this.setState({
+                message: msg,
+                loading: false,
+                error: false
+            })
+
+
         } catch (e) {
             console.error("Error: " + e)
             this.setState({
@@ -72,14 +86,42 @@ class MessageDetailPage extends React.Component {
         this.fetchData(user)
     }
 
-
+    deleteDoc = async () => {
+        try {
+            console.log('Deleting document data for user ' + this.state.user.uid + ", id: " + this.id);
+            this.setState({
+                data: [],
+                loading: true,
+                error: false,
+            })
+            await firestore.collection(`${this.state.user.uid}`).doc(this.id).delete()
+            console.log('Deleted Successfully!');
+            this.props.history.push('/messages')
+        } catch (e) {
+            console.error("Error: " + e)
+            this.setState({
+                message: null,
+                loading: false,
+                error: e
+            })
+        }
+    }
 
     render() {
         return (
             <div>
                 Message details page: <strong>{this.id}</strong>
-                {this.state.message && <MessageElement {...this.state.message} showDetail={false}/>}
+                {this.state.message && <MessageElement {...this.state.message} showDetail={false} />}
+
+                <input
+                    className="form-control btn btn-danger"
+                    type="button"
+                    name="delete"
+                    value="Delete"
+                    onClick={this.deleteDoc}
+                />
             </div>
+
         );
     }
 

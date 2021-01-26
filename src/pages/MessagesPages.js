@@ -87,15 +87,14 @@ class MessagesPages extends React.Component {
         }
 
         return (
-            <Layout>
+            <React.Fragment>
                 <h1>Messages!</h1>
                 {
                     this.state.loading ?
                         <Loading />
                         :
                         this.render2(this.state.data)
-                }
-            </Layout>
+                }</React.Fragment>
         )
     }
 

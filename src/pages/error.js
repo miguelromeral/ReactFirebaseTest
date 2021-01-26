@@ -12,13 +12,10 @@ function Error(props) {
 
     return (
         <React.Fragment>
-            <Layout>
                 <h1>
                     Something Happened! :(
                 </h1>
                 {showDescription()}
-            </Layout>
-
         </React.Fragment>
     )
 

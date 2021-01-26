@@ -16,56 +16,59 @@ import MessagesPages from './pages/MessagesPages'
 import AuthenticatedRoute from './components/AuthenticatedRoute'
 import CreateMssagePage from './pages/CreateMessagePage';
 import MessageDetailPage from './pages/MessageDetailPage';
+import Layout from './components/layout';
 
 function App() {
   const user = useContext(UserContext);
 
   return (
     // Diferent routes the app will have
-    <BrowserRouter>
-      <Switch>
-        <Route
-          exact
-          path="/"
-          component={HomeContainer}
-        />
-        <Route
-          exact
-          path="/signin"
-          component={SignIn}
-        />
-        <Route
-          exact
-          path="/signup"
-          component={SignUp}
-        />
-        <Route
-          exact
-          path="/profile"
-          component={ProfilePage}
-        />
-        <Route
-          exact
-          path="/messages"
-          component={MessagesPages}
-        />
-        <Route
-          exact
-          path="/create"
-          component={CreateMssagePage}
-        />
-        <Route path="/messages/:id" exact component={MessageDetailPage} />
-        <Route
-          exact
-          path="/passwordReset"
-          component={PasswordReset}
-        />
-        <Route
-          component={Error}
-        />
+    <Layout>
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={HomeContainer}
+          />
+          <Route
+            exact
+            path="/signin"
+            component={SignIn}
+          />
+          <Route
+            exact
+            path="/signup"
+            component={SignUp}
+          />
+          <Route
+            exact
+            path="/profile"
+            component={ProfilePage}
+          />
+          <Route
+            exact
+            path="/messages"
+            component={MessagesPages}
+          />
+          <Route
+            exact
+            path="/create"
+            component={CreateMssagePage}
+          />
+          <Route path="/messages/:id" exact component={MessageDetailPage} />
+          <Route
+            exact
+            path="/passwordReset"
+            component={PasswordReset}
+          />
+          <Route
+            component={Error}
+          />
 
-      </Switch>
-    </BrowserRouter>
+        </Switch>
+      </BrowserRouter>
+    </Layout>
   )
 }
 

@@ -4,6 +4,7 @@ import Message from "../classes/messageClass"
 import MessaageElement from "../components/messageElement"
 import Error from './error'
 import Layout from "../components/layout";
+import { Link } from 'react-router-dom'
 import Loading from "../components/loading";
 
 class CreateMssagePage extends React.Component {
@@ -13,19 +14,15 @@ class CreateMssagePage extends React.Component {
         user: null,
         loading: false,
         error: false,
-        added: false,
+        added: '',
     }
 
     componentDidMount() {
         auth.onAuthStateChanged(user => {
             console.log("on Auth state Changed: " + user.uid)
-            this.update(user)
-        })
-    }
-
-    update(user) {
-        this.setState({
-            user
+            this.setState({
+                user
+            })
         })
     }
 
@@ -42,7 +39,7 @@ class CreateMssagePage extends React.Component {
         }
 
         return (
-            <Layout>
+            <React.Fragment>
                 <h1>Create Message!</h1>
                 {
                     this.state.loading ?
@@ -50,7 +47,7 @@ class CreateMssagePage extends React.Component {
                         :
                         this.render2(this.state)
                 }
-            </Layout>
+            </React.Fragment>
         )
     }
 
@@ -65,13 +62,13 @@ class CreateMssagePage extends React.Component {
             await firestore.collection(`${uid}`)
                 .add({
                     content: this.state.content,
-                }).then(() => {
-                    console.log('Added!');
+                }).then((res) => {
+                    console.log('Added!: res: ' + res);
+                    this.setState({
+                        added: res.id,
+                        loading: false,
+                    })
                 });
-            this.setState({
-                added: true,
-                loading: false,
-            })
         } catch (e) {
             this.setState({
                 loading: false,
@@ -91,8 +88,20 @@ class CreateMssagePage extends React.Component {
 
 
     render2(state) {
-        if (state.added) {
-            return <div>Added!</div>
+        if (state.added != '') {
+            return (
+                <React.Fragment>
+                    <div>
+                        Added!
+                    </div>
+                    <div>
+                        <Link to="/messages">Go To Messages</Link>
+                    </div>
+                    <div>
+                        <Link to={`/messages/${state.added}`}>Go To {state.added} Message Detail</Link>
+                    </div>
+                </React.Fragment>
+            )
         }
         return (
             <React.Fragment>
