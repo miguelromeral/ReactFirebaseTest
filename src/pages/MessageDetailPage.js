@@ -6,7 +6,7 @@ import Message from "../classes/messageClass"
 import firestore, { auth } from "../firebase.config"
 import { UserContext } from "../providers/UserProvider";
 import Error from "./error";
-import Layout from "../components/layout";
+import Layout from "./layout";
 
 class MessageDetailPage extends React.Component {
     id = this.props.match.params.id

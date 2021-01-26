@@ -1,10 +1,11 @@
 import React from "react";
-import firestore, { auth } from "../firebase.config";
-import Message from "../classes/messageClass"
-import MessaageElement from "../components/messageElement"
-import Error from './error'
-import Layout from "../components/layout";
-import Loading from "../components/loading";
+import firestore, { auth } from "../../firebase.config";
+import Message from "../../classes/messageClass"
+import MessaageElement from "../../components/messageElement"
+import Error from '../error'
+import Layout from "../layout";
+import Loading from "../loading";
+import MessagePage from "./MessagesPage";
 
 class MessagesPages extends React.Component {
 
@@ -76,47 +77,10 @@ class MessagesPages extends React.Component {
 
 
     render() {
-        var user = this.state.user
-
-        if (user == null || user == undefined) {
-            return <Error description="Sin usuario" />
-        }
-
-        if (this.state.error) {
-            return <Error description={this.state.error} />
-        }
-
-        return (
-            <React.Fragment>
-                <h1>Messages!</h1>
-                {
-                    this.state.loading ?
-                        <Loading />
-                        :
-                        this.render2(this.state.data)
-                }</React.Fragment>
-        )
+        return <MessagePage {...this.state} />
     }
 
-    render2(data) {
-        if (data != null) {
-            if (data.length != 0) {
-                const listItems = data.map(data => (
-                    <li key={data.id}>
-                        <MessaageElement {...data} showDetail={true} />
-                    </li>
-                ))
-
-                return (
-                    <ul>{listItems}</ul>
-                );
-            } else {
-                <div>
-                    No messages for this user
-                </div>
-            }
-        }
-    }
+    
 
 };
 

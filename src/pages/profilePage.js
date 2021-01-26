@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useHistory } from 'react-router-dom'
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../firebase.config";
-import Layout from "../components/layout";
+import Layout from "./layout";
 import Error from './error'
 
 const ProfilePage = () => {

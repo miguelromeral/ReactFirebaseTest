@@ -1,6 +1,6 @@
 import React from 'react'
-import Layout from '../../components/layout'
-import Loading from '../../components/loading'
+import Layout from '../layout'
+import Loading from '../../pages/loading'
 import Error from '../error'
 import 'bootstrap/dist/css/bootstrap.css'
 import Test from '../../components/testElement'
@@ -37,13 +37,13 @@ function display(user, loading, error) {
     return (
         <React.Fragment>
             <div>
-                <Link to="/messages">My Messages</Link>
+                <Link to="/messages" className="btn btn-primary">My Messages</Link>
             </div>
             <div>
-                <Link to="/create">Create Message</Link>
+                <Link to="/create" className="btn btn-success">Create Message</Link>
             </div>
             <div>
-                <Link to="/profile">Profile</Link>
+                <Link to="/profile" className="btn btn-warning">Profile</Link>
             </div>
         </React.Fragment>
     )

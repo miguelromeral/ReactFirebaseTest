@@ -11,12 +11,11 @@ import SignUp from './pages/signUp'
 import ProfilePage from './pages/profilePage'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import PasswordReset from './pages/passwordReset'
-import MessagesPage from './pages/MessagesPage'
-import MessagesPages from './pages/MessagesPages'
+import MessagesPageContainer from './pages/MessagesPage/MessagesPageContainer'
 import AuthenticatedRoute from './components/AuthenticatedRoute'
-import CreateMssagePage from './pages/CreateMessagePage';
+import CreateMssagePageContainer from './pages/CreateMessage/CreateMssagePageContainer';
 import MessageDetailPage from './pages/MessageDetailPage';
-import Layout from './components/layout';
+import Layout from './pages/layout';
 
 function App() {
   const user = useContext(UserContext);
@@ -49,12 +48,12 @@ function App() {
           <Route
             exact
             path="/messages"
-            component={MessagesPages}
+            component={MessagesPageContainer}
           />
           <Route
             exact
             path="/create"
-            component={CreateMssagePage}
+            component={CreateMssagePageContainer}
           />
           <Route path="/messages/:id" exact component={MessageDetailPage} />
           <Route
